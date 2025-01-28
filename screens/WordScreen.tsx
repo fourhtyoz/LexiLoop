@@ -43,7 +43,7 @@ export default function WordScreen() {
                             setExamples(newExamples)
                         }
                     } else {
-                        setMeaning('Error: Word has not been found')
+                        setWord('Error: Word has not been found')
                         return
                     }
                 } else {

@@ -26,7 +26,7 @@ export default function ProverbScreen() {
                     if (anlam) {
                         setMeaning(toTitleCase(anlam))
                     } else {
-                        setWord('Error: Meaning has not been found')
+                        setMeaning('Error: Meaning has not been found')
                         return
                     }
                 } else {
