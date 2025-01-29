@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Text, TouchableOpacity, StyleSheet } from "react-native";
 
 
 export default function CustomButton({ title, onPress, disabled, color = '#000'}: any) {
@@ -12,6 +12,7 @@ export default function CustomButton({ title, onPress, disabled, color = '#000'}
 
 const s = StyleSheet.create({
     container: {
+        zIndex: 20,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,

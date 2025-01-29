@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Animated, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, Animated, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 
@@ -38,9 +38,9 @@ export default function SwipeHint({ text, color = '#fff', position = 'right', on
 
 const s = StyleSheet.create({
   container: {
+    zIndex: 10,
     position: 'absolute',
     top: '90%',
-    // left: '100%',
     transform: [{ translateX: 150 }],
     alignItems: 'center',
   },

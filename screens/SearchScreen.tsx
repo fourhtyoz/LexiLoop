@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { SafeAreaView, View, Text, TextInput, Animated, StyleSheet, ActivityIndicator } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, View, Text, TextInput, Animated, StyleSheet, ActivityIndicator, ImageBackground } from 'react-native';
 import axios from 'axios';
 import CustomButton from '@/components/CustomButton';
 import SwipeHint from '@/components/SwipeHint';
@@ -89,7 +89,7 @@ export default function SearchScreen({ navigation }: any) {
                         <View style={[s.section]}>
                             <Text style={s.title}>{meanings.length > 1 ? 'Meanings:' : 'Meaning:'}</Text>
                             {meanings.map((item: string, index: number) => (
-                                <Text key={index} style={s.content}>- {item}.</Text>
+                                <Text key={index} style={s.content}>{index+1}. {item}.</Text>
                             ))}
                         </View>
                     )}
@@ -107,11 +107,22 @@ export default function SearchScreen({ navigation }: any) {
                 </>
             )}
             <SwipeHint text="Word of the day" onPress={() => navigation.navigate('WordScreen')} />
+            <ImageBackground
+                source={require("@/assets/images/bg1.png")}
+                style={s.image}
+                resizeMode="contain"
+            />
         </SafeAreaView>
     )
 }
 
 const s = StyleSheet.create({
+    image: {
+        width: "100%", // Full width
+        height: 150, // Adjust the height of the image
+        position: "absolute",
+        bottom: 0, // Pin it to the bottom
+    },
     buttonContainer: {
         marginTop: 20
     },

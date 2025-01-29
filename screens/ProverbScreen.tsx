@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { SafeAreaView, View, Text, StyleSheet, ActivityIndicator, ImageBackground } from "react-native";
 import axios from "axios";
 import { toTitleCase } from "@/utils/helpFunctions";
 import SwipeHint from "@/components/SwipeHint";
@@ -65,11 +65,22 @@ export default function ProverbScreen({ navigation }: any) {
                 <Text style={s.content}>{meaning}.</Text>
             </View>
             <SwipeHint text='Word of the day' position='left'  onPress={() => navigation.navigate('WordScreen')}/>
+            <ImageBackground
+                source={require("@/assets/images/bg1.png")}
+                style={s.image}
+                resizeMode="contain"
+            />
         </SafeAreaView>
     )
 }
 
 const s = StyleSheet.create({
+    image: {
+        width: "100%", // Full width
+        height: 150, // Adjust the height of the image
+        position: "absolute",
+        bottom: 0, // Pin it to the bottom
+    },
     wrapper: {
         justifyContent: 'center',
         alignItems: 'center',

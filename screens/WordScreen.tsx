@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { SafeAreaView, View, Text, StyleSheet, ActivityIndicator, ImageBackground } from "react-native";
 import axios from "axios";
 import { toTitleCase } from "@/utils/helpFunctions";
 import SwipeHint from "@/components/SwipeHint";
@@ -67,6 +67,7 @@ export default function WordScreen({ navigation }: any) {
         )
     }
     return (
+        <>
         <SafeAreaView style={s.wrapper}>
             {error && <Text>{error}</Text>}
             <View style={s.wordContanier}>
@@ -76,7 +77,7 @@ export default function WordScreen({ navigation }: any) {
                 <View style={s.section}>
                     <Text style={s.title}>{meanings.length > 1 ? 'Meanings' : 'Meaning'}:</Text>
                     {meanings.map((item: string, index: number) => (
-                        <Text key={index} style={s.content}>- {item}.</Text>
+                        <Text key={index} style={s.content}>{index+1}. {item}.</Text>
                     ))}
                 </View>
             )}
@@ -89,17 +90,31 @@ export default function WordScreen({ navigation }: any) {
                 </View>
             )}
             <SwipeHint text='Proverb of the day' color='#000' onPress={() => navigation.navigate('ProverbScreen')} />
-            <SwipeHint text='Search' color='#000' position='left' onPress={() => navigation.navigate('SearchScreen')} />
+            {/* <SwipeHint text='Search' color='#000' position='left' onPress={() => navigation.navigate('SearchScreen')} /> */}
         </SafeAreaView>
+        <ImageBackground
+            source={require("@/assets/images/bg1.png")}
+            style={s.image}
+            resizeMode="contain"
+        />
+        </>
     )
 }
 
 const s = StyleSheet.create({
+    image: {
+        width: "100%", // Full width
+        height: 100, // Adjust the height of the image
+        position: "absolute",
+        bottom: 0, // Pin it to the bottom
+        zIndex: 1
+    },
     wrapper: {
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100%',
         paddingHorizontal: 20,
+        flex: 1,
+        backgroundColor: '#FFF'
     },
     wordContanier: {
         width: '100%',
