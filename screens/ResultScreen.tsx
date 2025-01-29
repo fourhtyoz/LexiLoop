@@ -2,61 +2,73 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView, View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import axios from "axios";
 import { toTitleCase } from "@/utils/helpFunctions";
-import SwipeHint from "@/components/SwipeHint";
+import AnimatedError from "@/components/AnimatedError";
+import CustomButton from "@/components/CustomButton";
 
 
-export default function WordScreen({ navigation }: any) {
+export default function ResultScreen({ navigation, route }: any) {
+    const query = route?.params?.query
+    
+    if (!query) {
+        return (
+            <SafeAreaView style={s.wrapper}>
+                <Text style={s.title}>Whoops...</Text>
+                <Text style={s.title}>There are no more screens :(</Text>
+            </SafeAreaView>
+        )
+    }
+
     const [word, setWord] = useState('');
     const [meanings, setMeanings] = useState<any>([]);
     const [examples, setExamples] = useState<any>([]);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false)
 
+    const resetAllFields = () => {
+        setWord('')
+        setMeanings('')
+        setExamples('')
+    }
+
     useEffect(() => {
         const fetchWord = async () => {
             setIsLoading(true)
-            try {
-                const { data } = await axios.get('https://sozluk.gov.tr/icerik')
-                if (data?.kelime && Array.isArray(data.kelime) && data.kelime.length > 0) {
-                    const allMeanings = data.kelime.map((item: any) => item.anlam)
-                    setMeanings(allMeanings)
-                    
-                    const { madde } = data.kelime[0]
-                    if (madde) {
-                        setWord(toTitleCase(madde))
-                        const { data } = await axios.get(`https://sozluk.gov.tr/gts?ara=${madde}`)
-                        const exampleSentences = data[0].anlamlarListe
-                        if (exampleSentences) {
-                            const newExamples = []
-                            for (let i of exampleSentences) {
-                                const examplesArray = i?.orneklerListe
-                                if (examplesArray) {
-                                    for (let j of examplesArray) {
-                                        if (j.ornek) {
-                                            newExamples.push(toTitleCase(j.ornek))
-                                        }
-                                    }
-                                }
-                            }
-                            setExamples(newExamples)
+
+            setWord(toTitleCase(query))
+
+            const newMeanings = []
+            const newExamples = []
+
+            try {   
+                const { data } = await axios.get(`https://sozluk.gov.tr/gts?ara=${query}`)
+
+                const dataMeanings = data[0]?.anlamlarListe
+                for (let m of dataMeanings) {
+                    const meaning = toTitleCase(m.anlam.replace('► ', ''))
+                    newMeanings.push(meaning)
+
+                    const dataExamples = m?.orneklerListe
+                    if (dataExamples && Array.isArray(dataExamples) && dataExamples.length > 0) {
+                        for (let ex of dataExamples) {
+                            const example = toTitleCase(ex.ornek.replace('► ', ''))
+                            newExamples.push(example)
                         }
-                    } else {
-                        setWord('Error: Word has not been found')
-                        return
                     }
-                } else {
-                    setError('Error while fetching data. Invali data.')
-                    return
                 }
+
+                setMeanings(newMeanings)
+                setExamples(newExamples)
             } catch (e) {
+                console.error('error', e)
                 setError(`error: ${e}`)
-                console.log('error', e)
+                resetAllFields()
             } finally {
                 setIsLoading(false)
             }
         }
+
         fetchWord()
-    }, [])
+    }, [query])
 
     
     if (isLoading) {
@@ -68,7 +80,7 @@ export default function WordScreen({ navigation }: any) {
     }
     return (
         <SafeAreaView style={s.wrapper}>
-            {error && <Text>{error}</Text>}
+            {error && <AnimatedError message={error} onHide={() => setError('')} />}
             <View style={s.wordContanier}>
                 <Text style={s.word}>{word}</Text>
             </View>
@@ -88,18 +100,23 @@ export default function WordScreen({ navigation }: any) {
                     ))}
                 </View>
             )}
-            <SwipeHint text='Proverb of the day' color='#000' onPress={() => navigation.navigate('ProverbScreen')} />
-            <SwipeHint text='Search' color='#000' position='left' onPress={() => navigation.navigate('SearchScreen')} />
+            <View style={s.buttonSection}>
+                <CustomButton title='Search for something else...' onPress={() => navigation.navigate('SearchScreen')} />
+            </View>
         </SafeAreaView>
     )
 }
 
 const s = StyleSheet.create({
+    buttonSection: {
+        marginTop: 100
+    },
     wrapper: {
         justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
         paddingHorizontal: 20,
+        backgroundColor: '#e5eaf5'
     },
     wordContanier: {
         width: '100%',
@@ -128,5 +145,5 @@ const s = StyleSheet.create({
     section: {
         width: '100%',
         marginTop: 20
-    },
+    }
 })

@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { SafeAreaView, View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import axios from "axios";
 import { toTitleCase } from "@/utils/helpFunctions";
+import SwipeHint from "@/components/SwipeHint";
 
 
-export default function ProverbScreen() {
+export default function ProverbScreen({ navigation }: any) {
     const [word, setWord] = useState('');
     const [meaning, setMeaning] = useState('');
     const [error, setError] = useState('');
@@ -60,9 +61,10 @@ export default function ProverbScreen() {
                 <Text style={s.word}>{word}</Text>
             </View>
             <View style={s.section}>
-                <Text style={s.title}>Anlam:</Text>
+                <Text style={s.title}>Meaning:</Text>
                 <Text style={s.content}>{meaning}.</Text>
             </View>
+            <SwipeHint text='Word of the day' position='left'  onPress={() => navigation.navigate('WordScreen')}/>
         </SafeAreaView>
     )
 }
