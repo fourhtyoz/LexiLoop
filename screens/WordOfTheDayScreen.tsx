@@ -45,7 +45,7 @@ export default function WordOfTheDayScreen({ navigation }: any) {
                         return
                     }
                 } else {
-                    setError('Error while fetching data. Invali data.')
+                    setError('Error while fetching data. Invalid data.')
                     return
                 }
             } catch (e) {
@@ -61,7 +61,7 @@ export default function WordOfTheDayScreen({ navigation }: any) {
     
     if (isLoading) {
         return (
-            <SafeAreaView style={s.wrapper}>
+            <SafeAreaView style={[s.wrapper, { justifyContent: 'center' }]}>
                 <ActivityIndicator />
             </SafeAreaView>
         )

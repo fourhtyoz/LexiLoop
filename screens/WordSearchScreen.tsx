@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, TextInput, Animated, StyleSheet, ActivityIndicator, ImageBackground, ScrollView } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, Animated, StyleSheet, ActivityIndicator, ScrollView } from 'react-native';
 import axios from 'axios';
 import CustomButton from '@/components/CustomButton';
 import SwipeHint from '@/components/SwipeHint';

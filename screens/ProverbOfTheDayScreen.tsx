@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, View, Text, StyleSheet, ActivityIndicator, ImageBackground } from "react-native";
+import { SafeAreaView, View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import axios from "axios";
 import { toTitleCase } from "@/utils/helpFunctions";
 import SwipeHint from "@/components/SwipeHint";
@@ -49,7 +49,7 @@ export default function ProverbOfTheDayScreen({ navigation }: any) {
     
     if (isLoading) {
         return (
-            <SafeAreaView style={s.wrapper}>
+            <SafeAreaView style={[s.wrapper, { justifyContent: 'center' }]}>
                 <ActivityIndicator />
             </SafeAreaView>
         )
