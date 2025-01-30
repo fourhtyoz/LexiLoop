@@ -15,7 +15,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#051346"
-      }
+      },
+      "package": "com.fourhtyoz.LexiLoop"
     },
     "plugins": [
       "expo-router",
@@ -31,6 +32,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "0475c23b-e3e8-402f-8e8f-3fb981585fff"
+      }
     }
   }
 }
