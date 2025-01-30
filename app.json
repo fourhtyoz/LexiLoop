@@ -1,6 +1,6 @@
 {
   "expo": {
-    "scheme": "LexiLoop",
+    "scheme": "myapp",
     "name": "LexiLoop",
     "slug": "LexiLoop",
     "version": "1.0.0",
@@ -19,7 +19,7 @@
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#051346"
       },
-      "package": "com.fourhtyoz.LexiLoop"
+      "package": "com.fourhtyoz.lexiloop"
     },
     "plugins": [
       "expo-router",
