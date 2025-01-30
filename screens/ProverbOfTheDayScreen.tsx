@@ -50,7 +50,7 @@ export default function ProverbOfTheDayScreen({ navigation }: any) {
     if (isLoading) {
         return (
             <SafeAreaView style={[s.wrapper, { justifyContent: 'center' }]}>
-                <ActivityIndicator />
+                <ActivityIndicator size="large" />
             </SafeAreaView>
         )
     }

@@ -78,7 +78,7 @@ export default function WordSearchScreen({ navigation }: any) {
                 </View>
             )}
 
-            {isLoading && <ActivityIndicator color='#FFF' />}
+            {isLoading && <ActivityIndicator color='#FFF' size="large" />}
 
             {!isLoading && word && (
                 <ScrollView contentContainerStyle={[s.scrollWrapper]}>

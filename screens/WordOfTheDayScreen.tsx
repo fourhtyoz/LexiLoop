@@ -62,7 +62,7 @@ export default function WordOfTheDayScreen({ navigation }: any) {
     if (isLoading) {
         return (
             <SafeAreaView style={[s.wrapper, { justifyContent: 'center' }]}>
-                <ActivityIndicator />
+                <ActivityIndicator size="large" />
             </SafeAreaView>
         )
     }

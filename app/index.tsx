@@ -20,7 +20,7 @@ export default function App() {
                 <Text style={s.errorMessage}>
                     {`Whoops, you need to be connected to the internet to use the app :(`}
                 </Text>
-                <Text style={[s.errorMessage, { marginTop: 20}]}>
+                <Text style={[s.errorMessage, { marginTop: 20 }]}>
                     Try again later...
                 </Text>
             </View>
