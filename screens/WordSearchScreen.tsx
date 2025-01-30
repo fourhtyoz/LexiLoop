@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SafeAreaView, View, Text, TextInput, Animated, StyleSheet, ActivityIndicator, ImageBackground } from 'react-native';
+import { SafeAreaView, View, Text, TextInput, Animated, StyleSheet, ActivityIndicator, ImageBackground, ScrollView } from 'react-native';
 import axios from 'axios';
 import CustomButton from '@/components/CustomButton';
 import SwipeHint from '@/components/SwipeHint';
@@ -7,7 +7,7 @@ import { toTitleCase } from '@/utils/helpFunctions';
 import AnimatedError from '@/components/AnimatedError';
 
 
-export default function SearchScreen({ navigation }: any) {
+export default function WordSearchScreen({ navigation }: any) {
     const [query, setQuery] = useState('');
     const [word, setWord] = useState('');
     const [meanings, setMeanings] = useState<any>([]);
@@ -54,7 +54,7 @@ export default function SearchScreen({ navigation }: any) {
             setExamples(newExamples);
         } catch (e) {
             console.error('error', e);
-            setError(`error: ${e}`);
+            setError(`${e}`);
         } finally {
             setIsLoading(false);
         }
@@ -81,7 +81,7 @@ export default function SearchScreen({ navigation }: any) {
             {isLoading && <ActivityIndicator color='#FFF' />}
 
             {!isLoading && word && (
-                <>
+                <ScrollView contentContainerStyle={[s.scrollWrapper]}>
                     <Animated.View style={[s.wordContanier]}>
                         <Text style={s.word}>{word}</Text>
                     </Animated.View>
@@ -104,9 +104,9 @@ export default function SearchScreen({ navigation }: any) {
                     <View style={s.buttonContainer}>
                         <CustomButton title='Search another one' color='#FFF' onPress={handleResetResult}/>
                     </View>
-                </>
+                </ScrollView>
             )}
-            <SwipeHint text="Word of the day" onPress={() => navigation.navigate('WordScreen')} />
+            <SwipeHint text="Word of the day" onPress={() => navigation.navigate('WordOfTheDayScreen')} />
             {/* TODO: waiting for the image to come */}
             {/* <ImageBackground
                 source={require("@/assets/images/bg1.png")}
@@ -118,19 +118,26 @@ export default function SearchScreen({ navigation }: any) {
 }
 
 const s = StyleSheet.create({
-    image: {
-        width: "100%", // Full width
-        height: 150, // Adjust the height of the image
-        position: "absolute",
-        bottom: 0, // Pin it to the bottom
-    },
+    // image: {
+    //     width: "100%",
+    //     height: 150,
+    //     position: "absolute",
+    //     bottom: 0,
+    // },
     buttonContainer: {
         marginTop: 20
     },
-    wrapper: {
+    scrollWrapper: {
+        paddingVertical: 200,
         justifyContent: 'center',
         alignItems: 'center',
-        height: '100%',
+        paddingHorizontal: 20,
+        backgroundColor: '#021B79',
+    },
+    wrapper: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
         paddingHorizontal: 20,
         backgroundColor: '#021B79',
     },

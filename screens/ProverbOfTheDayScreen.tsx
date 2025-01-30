@@ -5,7 +5,7 @@ import { toTitleCase } from "@/utils/helpFunctions";
 import SwipeHint from "@/components/SwipeHint";
 
 
-export default function ProverbScreen({ navigation }: any) {
+export default function ProverbOfTheDayScreen({ navigation }: any) {
     const [word, setWord] = useState('');
     const [meaning, setMeaning] = useState('');
     const [error, setError] = useState('');
@@ -64,7 +64,7 @@ export default function ProverbScreen({ navigation }: any) {
                 <Text style={s.title}>Meaning:</Text>
                 <Text style={s.content}>{meaning}.</Text>
             </View>
-            <SwipeHint text='Word of the day' position='left'  onPress={() => navigation.navigate('WordScreen')}/>
+            <SwipeHint text='Word of the day' position='left'  onPress={() => navigation.navigate('WordOfTheDayScreen')}/>
             {/* TODO: waiting for the image to come */}
             {/* <ImageBackground
                 source={require("@/assets/images/bg2.png")}
@@ -76,20 +76,20 @@ export default function ProverbScreen({ navigation }: any) {
 }
 
 const s = StyleSheet.create({
-    image: {
-        width: "100%", // Full width
-        height: 150, // Adjust the height of the image
-        position: "absolute",
-        bottom: 0, // Pin it to the bottom
-    },
+    // image: {
+    //     width: "100%",
+    //     height: 150,
+    //     position: "absolute",
+    //     bottom: 0,
+    // },
     wrapper: {
-        justifyContent: 'center',
         alignItems: 'center',
         height: '100%',
         paddingHorizontal: 20,
         backgroundColor: '#000'
     },
     wordContanier: {
+        marginTop: 200,
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
