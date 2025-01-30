@@ -65,11 +65,12 @@ export default function ProverbScreen({ navigation }: any) {
                 <Text style={s.content}>{meaning}.</Text>
             </View>
             <SwipeHint text='Word of the day' position='left'  onPress={() => navigation.navigate('WordScreen')}/>
-            <ImageBackground
-                source={require("@/assets/images/bg1.png")}
+            {/* TODO: waiting for the image to come */}
+            {/* <ImageBackground
+                source={require("@/assets/images/bg2.png")}
                 style={s.image}
                 resizeMode="contain"
-            />
+            /> */}
         </SafeAreaView>
     )
 }

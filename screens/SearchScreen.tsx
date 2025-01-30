@@ -107,11 +107,12 @@ export default function SearchScreen({ navigation }: any) {
                 </>
             )}
             <SwipeHint text="Word of the day" onPress={() => navigation.navigate('WordScreen')} />
-            <ImageBackground
+            {/* TODO: waiting for the image to come */}
+            {/* <ImageBackground
                 source={require("@/assets/images/bg1.png")}
                 style={s.image}
                 resizeMode="contain"
-            />
+            /> */}
         </SafeAreaView>
     )
 }
